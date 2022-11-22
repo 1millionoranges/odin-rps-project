@@ -6,6 +6,7 @@ function getCpuChoice(){
 }
 
 function getResultString(playerChoice, cpuChoice, result){
+    let p = playerChoice.toLowerCase();
     switch(result){
         case -2:
             return "Please enter rock paper or scissors.";
@@ -19,7 +20,7 @@ function getResultString(playerChoice, cpuChoice, result){
     return "switch didnt catch";        
 }
 function getWinner(playerChoice, cpuChoice){
-    p = playerChoice.toLowerCase();
+    let p = playerChoice.toLowerCase();
     if(p == "rock"){
         switch(cpuChoice){
             case "Rock":
