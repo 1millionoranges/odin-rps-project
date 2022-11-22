@@ -56,7 +56,7 @@ function getWinner(playerChoice, cpuChoice){
 function game(){
     let playerScore = 0;
     let cpuScore = 0;
-    for (let i = 0; i < 5; i++){
+    while (playerScore < 3 && cpuScore < 3){
         let playerChoice = prompt("Please enter your choice");
         let cpuChoice = getCpuChoice();
         let result = getWinner(playerChoice, cpuChoice);
@@ -67,5 +67,7 @@ function game(){
         console.log("player score: " + playerScore);
         console.log("computer score: " + cpuScore);
     }
+    if(playerScore >= 3) console.log("You win the Bo5!");
+    if(cpuScore >= 3) console.log("You lose the Bo5  :(");
 }
 game();
