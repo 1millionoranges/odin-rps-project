@@ -5,55 +5,67 @@ function getCpuChoice(){
     if(choicenum == 3) return "Scissors";
 }
 
-function playRound(playerChoice, cpuChoice){
+function getResultString(playerChoice, cpuChoice, result){
+    switch(result){
+        case -2:
+            return "Please enter rock paper or scissors.";
+        case -1:
+            return "You lose! " + cpuChoice + " beats " + p + "."; 
+        case 0:
+            return "Tie!";
+        case 1:
+            return "You win! " + p + " beats " + cpuChoice + ".";
+    }
+    return "switch didnt catch";        
+}
+function getWinner(playerChoice, cpuChoice){
     p = playerChoice.toLowerCase();
-    result = "tie"
     if(p == "rock"){
         switch(cpuChoice){
             case "Rock":
-                result = "tie";
-                break;
+                return 0;
             case "Paper":
-                result = "lose";
-                break;
+                return -1;
             case "Scissors":
-                result = "win";
-                break;
+                return 1;
         }
     }else if(p == "paper"){
         switch(cpuChoice){
             case "Rock":
-                result = "win";
-                break;
+                return 1;
             case "Paper":
-                result = "tie";
-                break;
+                return 0;
             case "Scissors":
-                result = "lose";
-                break;
+                return -1;
         }
     }else if(p == "scissors"){
         switch(cpuChoice){
             case "Rock":
-                result = "lose";
-                break;
+                return -1;
             case "Paper":
-                result = "win";
-                break;
+                return 1;
             case "Scissors":
-                result = "tie";
-                break;
+                return 0;
         }
     }
     else{
-        return "Please enter rock, paper or scissors.";
+        return 0;
     }
-    if(result == "win")
-        return "You win! " + p + " beats " + cpuChoice + ".";
-    if(result == "tie")
-        return "Tie!";
-    if(result == "lose");
-        return "You lose! " + cpuChoice + " beats " + p + "."; 
+    return 0;
 }
-
-console.log(playRound(getCpuChoice(), getCpuChoice()));
+function game(){
+    let playerScore = 0;
+    let cpuScore = 0;
+    for (let i = 0; i < 5; i++){
+        let playerChoice = prompt("Please enter your choice");
+        let cpuChoice = getCpuChoice();
+        let result = getWinner(playerChoice, cpuChoice);
+        let message = getResultString(playerChoice, cpuChoice, result);
+        if(result == -1) cpuScore++;
+        if(result == 1) playerScore++;
+        console.log(message);
+        console.log("player score: " + playerScore);
+        console.log("computer score: " + cpuScore);
+    }
+}
+game();
