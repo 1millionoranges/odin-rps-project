@@ -71,4 +71,37 @@ function game(){
     if(playerScore >= 3) console.log("You win the Bo5!");
     if(cpuScore >= 3) console.log("You lose the Bo5  :(");
 }
-game();
+function logEvent(e){
+    console.log(e.target.classList);
+}
+function playRound(e){
+    let playerChoice = e.target.classList[0];
+    let cpuChoice = getCpuChoice();
+    let result = getWinner(playerChoice, cpuChoice);
+    let message = getResultString(playerChoice, cpuChoice, result);
+    if(result == -1) cpuScore++;
+    if(result == 1) playerScore++;
+    updateScoreDisplay();
+    updateMessageDisplay(message);
+    console.log(message);
+    console.log("player score: " + playerScore);
+    console.log("computer score: " + cpuScore);
+}
+function updateScoreDisplay(){
+    const playerScoreNode = document.querySelector("#playerscore");
+    playerScoreNode.textContent = playerScore;
+    const cpuScoreNode = document.querySelector("#cpuscore");
+    cpuScoreNode.textContent = cpuScore;
+}
+function updateMessageDisplay(m){
+    const messageBox = document.querySelector("#messagebox");
+    messageBox.textContent = m;
+}
+const keys= document.querySelectorAll(".choice");
+keys.forEach((button) => {
+    button.addEventListener('click', playRound);
+})
+let playerScore = 0;
+let cpuScore = 0;
+updateScoreDisplay();
+//game();
