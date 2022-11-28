@@ -83,9 +83,7 @@ function playRound(e){
     if(result == 1) playerScore++;
     updateScoreDisplay();
     updateMessageDisplay(message);
-    console.log(message);
-    console.log("player score: " + playerScore);
-    console.log("computer score: " + cpuScore);
+    
 }
 function updateScoreDisplay(){
     const playerScoreNode = document.querySelector("#playerscore");
@@ -93,9 +91,28 @@ function updateScoreDisplay(){
     const cpuScoreNode = document.querySelector("#cpuscore");
     cpuScoreNode.textContent = cpuScore;
 }
+function playAgain(){
+    cpuScore = 0;
+    playerScore = 0;
+}
+function removeButtons(){
+    const body = document.querySelector("body");
+    keys.forEach((button) => {
+        console.log(`removing ${button}`);
+        body.removeChild(button)
+    });
+}
 function updateMessageDisplay(m){
     const messageBox = document.querySelector("#messagebox");
     messageBox.textContent = m;
+    if(playerScore > 4){
+        messageBox.textContent = "You win the set!!!";
+        removeButtons()
+    }
+    if(cpuScore > 4){
+        messageBox.textContent = "You lose the set!";
+        removeButtons();
+    }
 }
 const keys= document.querySelectorAll(".choice");
 keys.forEach((button) => {
@@ -104,4 +121,5 @@ keys.forEach((button) => {
 let playerScore = 0;
 let cpuScore = 0;
 updateScoreDisplay();
+
 //game();
